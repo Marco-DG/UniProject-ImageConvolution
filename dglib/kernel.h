@@ -3,13 +3,14 @@
 
 #include "kernel_type.h" // kernel_t
 
+// todo factory
 namespace dglib::kernel
 {
     kernel_t Identity ({
         { 0, 0, 0 },
         { 0, 1, 0 },
         { 0, 0, 0 }
-    },1);
+    }, 1);
 
     kernel_t StrongEdgeDetection ({
         { 1, 0,-1 },
