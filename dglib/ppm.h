@@ -138,10 +138,8 @@ namespace dglib
         const std::size_t height = image.height();
         const std::size_t channels = image.channels();
 
-        // copy image._data to avoid an eventual pointer misuse
-        //uint8_t * uint8_buffer = &image.data()[0]; // vector to array
-        // otherwise to enhance performance we can copy the ptr
-        uint8_t * uint8_buffer = &(image.data_ptr()->at(0)); // vector to array
+        // Access trough friendship
+        uint8_t  * uint8_buffer = &image._data[0]; // vector to array
 
         if (output_file.fail())
         {
