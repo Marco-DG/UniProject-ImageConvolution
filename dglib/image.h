@@ -6,7 +6,6 @@
 
 #include "exception.h" // dglib::exception, std::move
 #include "kernel_type.h" // kernel_t, matrix_t
-#include "ppm.h"
 
 namespace dglib
 {
@@ -32,6 +31,9 @@ namespace dglib
             // constructors
             image(std::size_t height, std::size_t width, std::size_t channels, T* data);
             image(std::size_t height, std::size_t width, std::size_t channels, std::vector<T> data);
+
+            // operators
+            bool operator == (const image<T>& compare_to_image);
 
             // getters
             T                   at      (std::size_t y, std::size_t x, std::size_t c) const;
@@ -81,6 +83,13 @@ namespace dglib
     template <typename T> image<T>::image(std::size_t height, std::size_t width, std::size_t channels, std::vector<T> data) : _height(height), _width(width), _channels(channels)
     {
         _data = data;
+    }
+
+    // operators
+    template <typename T> bool image<T>::operator == (const image<T>& compare_to_image)
+    {
+        if (_width == compare_to_image._width() and _height == compare_to_image._height and _channels == compare_to_image._channels and _data == compare_to_image._data) return true;
+        else return false;
     }
 
     // getters
