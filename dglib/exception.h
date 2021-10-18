@@ -2,7 +2,6 @@
 #define DGLIB_EXCEPTION_H
 
 #include <exception> // exception
-#include <utility> // move
 
 namespace dglib
 {
@@ -11,7 +10,7 @@ namespace dglib
         protected:
             std::string _error_message;
         public:
-            explicit exception(std::string error_message) : _error_message(std::move(error_message)) {}
+            explicit exception(std::string & error_message) : _error_message(error_message) {}
             const char* what() const noexcept override { return _error_message.c_str(); }
     };
 }
