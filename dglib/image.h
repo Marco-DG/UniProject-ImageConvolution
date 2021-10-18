@@ -6,11 +6,14 @@
 
 #include "exception.h" // dglib::exception, std::move
 #include "kernel_type.h" // kernel_t, matrix_t
+#include "ppm.h"
 
 namespace dglib
 {
     template <typename T> class image
     {
+        friend class ppm;
+
         private:
             // members
             std::vector<T> _data;
@@ -32,8 +35,6 @@ namespace dglib
 
             // getters
             T                   at      (std::size_t y, std::size_t x, std::size_t c) const;
-            std::vector<T>      data    ()                                      const { return _data; }
-            std::vector<T> *    data_ptr()                                            { return &_data; }
             std::size_t         width   ()                                      const { return _width; }
             std::size_t         height  ()                                      const { return _height; }
             std::size_t         channels()                                      const { return _channels; }
