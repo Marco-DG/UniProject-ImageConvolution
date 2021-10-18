@@ -32,7 +32,6 @@ namespace dglib
 
             // getters
             T                   at      (std::size_t y, std::size_t x, std::size_t c) const;
-            T *                 at_ptr  (std::size_t y, std::size_t x, std::size_t c);
             std::vector<T>      data    ()                                      const { return _data; }
             std::vector<T> *    data_ptr()                                            { return &_data; }
             std::size_t         width   ()                                      const { return _width; }
@@ -88,12 +87,6 @@ namespace dglib
     {
         _at_check_params(y, x, c);
         return _data[c + _channels * x + _channels * _width * y];
-    }
-
-    template <typename T> T * image<T>::at_ptr(std::size_t y, std::size_t x, std::size_t c)
-    {
-        _at_check_params(y, x, c);
-        return &_data[c + _channels * x + _channels * _width * y];
     }
 
     template <typename T> image<T> image<T>::convolve(kernel_t kernel)
