@@ -23,16 +23,16 @@ namespace dglib
             struct _exception_image_convolve;
 
             // methods
-            void _at_check_params(std::size_t, std::size_t, std::size_t) const;
+            void _at_check_params(std::size_t y, std::size_t x, std::size_t c) const;
 
         public:
             // constructors
-            image(std::size_t, std::size_t, std::size_t, T*);
-            image(std::size_t, std::size_t, std::size_t, std::vector<T>);
+            image(std::size_t height, std::size_t width, std::size_t channels, T* data);
+            image(std::size_t height, std::size_t width, std::size_t channels, std::vector<T> data);
 
             // getters
-            T                   at      (std::size_t, std::size_t, std::size_t) const;
-            T *                 at_ptr  (std::size_t, std::size_t, std::size_t);
+            T                   at      (std::size_t y, std::size_t x, std::size_t c) const;
+            T *                 at_ptr  (std::size_t y, std::size_t x, std::size_t c);
             std::vector<T>      data    ()                                      const { return _data; }
             std::vector<T> *    data_ptr()                                            { return &_data; }
             std::size_t         width   ()                                      const { return _width; }
