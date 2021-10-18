@@ -3,7 +3,6 @@
 
 #include "kernel_type.h" // kernel_t
 
-// todo factory
 namespace dglib::kernel
 {
     kernel_t Identity ({
