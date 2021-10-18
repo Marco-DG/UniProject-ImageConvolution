@@ -5,7 +5,7 @@
 #include <cstdint> // uint8_t
 #include <fstream> // string, ifstream, ofstream
 
-#include "exception.h" // dglib::exception, std::move
+#include "exception.h" // dglib::exception
 #include "image.h" // image
 
 namespace dglib
@@ -33,12 +33,12 @@ namespace dglib
     // exceptions
     struct ppm::_exception_ppm_read : exception
     {
-        explicit _exception_ppm_read(std::string error_message) : exception(std::move(error_message)) {}
+        explicit _exception_ppm_read(std::string error_message) : exception(error_message) {}
     };
 
     struct ppm::_exception_ppm_write : exception
     {
-        explicit _exception_ppm_write(std::string error_message) : exception(std::move(error_message)) {}
+        explicit _exception_ppm_write(std::string error_message) : exception(error_message) {}
     };
 
     // methods

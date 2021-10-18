@@ -47,12 +47,12 @@ namespace dglib
     // exceptions
     template <typename T> struct image<T>::_exception_image_at : exception
     {
-        explicit _exception_image_at(std::string error_message) : exception(std::move(error_message)) {}
+        explicit _exception_image_at(std::string error_message) : exception(error_message) {}
     };
 
     template <typename T> struct image<T>::_exception_image_convolve : exception
     {
-        explicit _exception_image_convolve(std::string error_message) : exception(std::move(error_message)) {}
+        explicit _exception_image_convolve(std::string error_message) : exception(error_message) {}
     };
 
     // methods
