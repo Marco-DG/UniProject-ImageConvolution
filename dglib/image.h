@@ -33,7 +33,7 @@ namespace dglib
             image(std::size_t height, std::size_t width, std::size_t channels, std::vector<T> data);
 
             // operators
-            bool operator == (const image<T>& compare_to_image);
+            bool operator == (const image<T>& compare_to_image) const;
 
             // getters
             T                   at      (std::size_t y, std::size_t x, std::size_t c) const;
@@ -86,7 +86,7 @@ namespace dglib
     }
 
     // operators
-    template <typename T> bool image<T>::operator == (const image<T>& compare_to_image)
+    template <typename T> bool image<T>::operator == (const image<T>& compare_to_image) const
     {
         if (_width == compare_to_image._width() and _height == compare_to_image._height and _channels == compare_to_image._channels and _data == compare_to_image._data) return true;
         else return false;
