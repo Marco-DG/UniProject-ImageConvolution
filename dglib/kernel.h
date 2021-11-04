@@ -5,6 +5,12 @@
 
 namespace dglib::kernel
 {
+    kernel_t Custom ({
+        { 1, 1, 1 },
+        { 1, 1, 1 },
+        { 1, 1, 1}
+    }, 9);
+
     kernel_t Identity ({
         { 0, 0, 0 },
         { 0, 1, 0 },
@@ -39,13 +45,13 @@ namespace dglib::kernel
         { 1, 1, 1 },
         { 1, 1, 1 },
         { 1, 1, 1 }
-    }, 1/9);
+    }, 9);
 
     kernel_t GaussianBlur_3x3 ({
         { 1, 2, 1 },
         { 2, 4, 2 },
         { 1, 2, 1 }
-    }, 1/16);
+    }, 16);
 
     kernel_t GaussianBlur_5x5 ({
         { 1,   4,   6,   4,   1 },
@@ -53,7 +59,7 @@ namespace dglib::kernel
         { 6,  24,  36,  24,   6 },
         { 4,  16,  24,  16,   4 },
         { 1,   4,   6,   4,   1 }
-    }, 1/256);
+    }, 256);
 
     kernel_t UnsharpMasking_5x5 ({
         {-1,  -4,  -6,  -4,  -1 },
@@ -61,7 +67,7 @@ namespace dglib::kernel
         {-6, -24, 476, -24,  -6 },
         {-4, -16, -24, -16,  -4 },
         {-1,  -4,  -6,  -4,  -1 }
-    }, 1/256);
+    }, 256);
 }
 
 #endif

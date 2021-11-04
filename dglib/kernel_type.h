@@ -12,13 +12,13 @@ namespace dglib
     {
         private:
             matrix_t _matrix;
-            float _factor;
+            size_t _scale;
 
         public:
-            kernel_t(matrix_t matrix, float factor) : _matrix(std::move(matrix)), _factor(factor) {}
+            kernel_t(matrix_t matrix, float scale) : _matrix(std::move(matrix)), _scale(scale) {}
 
             matrix_t matrix()       { return _matrix; }
-            float factor()          { return _factor; }
+            float scale()          { return _scale; }
             std::size_t width()     { return _matrix.size(); }
             std::size_t height()    { return _matrix[0].size(); }
     };
