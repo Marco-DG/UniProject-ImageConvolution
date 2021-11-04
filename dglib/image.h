@@ -3,6 +3,7 @@
 
 #include <cstddef> // size_t
 #include <vector> // vector
+#include <limits> // numeric_limits
 
 #include "exception.h" // dglib::exception, std::move
 #include "kernel_type.h" // kernel_t, matrix_t
@@ -105,7 +106,7 @@ namespace dglib
         const matrix_t  kernel_matrix = kernel.matrix();
         const std::size_t kernel_height = kernel.height();
         const std::size_t kernel_width = kernel.width();
-        const float kernel_factor = kernel.factor();
+        const float kernel_scale = kernel.scale();
 
         // Check if kernel has odd height and width
         if (kernel_height % 2 == 0)
@@ -117,26 +118,41 @@ namespace dglib
             throw _exception_image_convolve("Kernel width has to be odd: 'kernel_width' = " + std::to_string(kernel_width));
         }
 
+        // Check if kernel height is equal to kernel width ( Even though it should be possible to mate it work even if it is not a square matrix )
+        if (kernel_height != kernel_width)
+        {
+            throw _exception_image_convolve("'kernel_width' (" + std::to_string(kernel_width) + ") has to be the same as 'kernel_height' (" + std::to_string(kernel_height));
+        }
+
         // Pre-allocate the output image
         std::vector<T> conv_data; conv_data.resize(_height * _width * _channels, 0);
 
         // Convolve
-        float sum;
+        std::size_t kernel_center = kernel_width /2;
+        long long sum;
+
         for (std::size_t img_c = 0; img_c < _channels; img_c++)
         {
-            for (std::size_t img_y = 0; img_y < _height - kernel_height +1; img_y++)
+            for (std::size_t img_y = 0; img_y < _height; img_y++)
             {
-                for (std::size_t img_x = 0; img_x < _width - kernel_width +1; img_x++)
+                for (std::size_t img_x = 0; img_x < _width; img_x++)
                 {
                     sum = 0;
                     for (std::size_t ker_y = 0; ker_y < kernel_height; ker_y++)
                     {
                         for (std::size_t ker_x = 0; ker_x < kernel_width; ker_x++)
                         {
-                            sum += at(img_y + ker_y, img_x + ker_x, img_c) * kernel_matrix[ker_y][ker_x]; //* kernel_factor;
+                            if((img_y + ker_y - kernel_center) < _height && (img_x + ker_x - kernel_center) < _width)
+                            {
+                                sum += at(img_y + ker_y - kernel_center, img_x + ker_x - kernel_center, img_c) * kernel_matrix[ker_y][ker_x];
+                            }
                         }
                     }
-                    conv_data[img_c + _channels * img_x + _channels * _width * img_y] = sum ;
+                    sum /= kernel_scale;
+                    if(sum < 0) sum = 0;
+                    if(sum > 255) sum = std::numeric_limits<T>::max();
+
+                    conv_data[img_c + _channels * img_x + _channels * _width * img_y] = sum;
                 }
             }
         }
