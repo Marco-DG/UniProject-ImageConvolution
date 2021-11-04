@@ -89,7 +89,7 @@ namespace dglib
     // operators
     template <typename T> bool image<T>::operator == (const image<T>& compare_to_image) const
     {
-        if (_width == compare_to_image._width() and _height == compare_to_image._height and _channels == compare_to_image._channels and _data == compare_to_image._data) return true;
+        if (_width == compare_to_image._width and _height == compare_to_image._height and _channels == compare_to_image._channels and _data == compare_to_image._data) return true;
         else return false;
     }
 
