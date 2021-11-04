@@ -7,6 +7,8 @@ int main() {
 
     auto im = ppm::read("./lena.ppm");
 
+
+    ppm::write(im.convolve(kernel::Custom               ), "./output_images/Custom.ppm"              );
     ppm::write(im.convolve(kernel::Identity             ), "./output_images/Identity.ppm"              );
     ppm::write(im.convolve(kernel::UnsharpMasking_5x5   ), "./output_images/UnsharpMasking_5x5.ppm"    );
     ppm::write(im.convolve(kernel::WeakEdgeDetection    ), "./output_images/WeakEdgeDetection.ppm"     );
