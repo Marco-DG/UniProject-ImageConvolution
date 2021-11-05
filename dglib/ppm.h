@@ -14,16 +14,16 @@ namespace dglib
     class ppm
     {
         private:
-            // exceptions
-            struct _exception_ppm_read;
-            struct _exception_ppm_write;
-
             // methods
             static bool _skip_whitespaces   (std::ifstream& stream);
             static bool _skip_comments      (std::ifstream& stream);
             static void _skip_to_data       (std::ifstream& stream);
 
         public:
+            // exceptions
+            struct _exception_ppm_read;
+            struct _exception_ppm_write;
+
             // methods
             static image<uint8_t>   read    (const std::string& file_path);
             static void             write   (image<uint8_t> image, const std::string& file_path);
