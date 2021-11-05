@@ -1,3 +1,5 @@
+# Image Convolution
+
 Implemented kernels from [Wikipedia](https://en.wikipedia.org/wiki/Kernel_(image_processing))
 
 ![alt text](https://github.com/Marco-DG/UniProject-ImageConvolution/blob/master/readme_rsc/Identity.png?raw=true)
