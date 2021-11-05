@@ -1,12 +1,17 @@
 #include "gtest/gtest.h"
 #include "../dglib/image.h"
 #include "../dglib/kernel.h"
+#include "../dglib/ppm.h"
+#include "../dglib/exception.h"
 
 #include <cstddef> // size_t
 #include <cstdint> // uint8_t
 #include <vector> // vector
 
 using namespace dglib;
+
+const std::string test_image_path = "test/test_image_beaver.ppm";
+const std::string test_image_convolved_path = "test/test_image_beaver_BoxBlurred.ppm";
 
 // test_image.ppm
 image<uint8_t> test_image (2, 3, 3,{
@@ -42,4 +47,40 @@ TEST(image, convolve)
     // using kernel::Identity
     image<uint8_t> conv_image = test_image.convolve(kernel::Identity);
     EXPECT_EQ(conv_image == test_image, true);
+
+    // using kernel::BoxBlur
+    conv_image = ppm::read(test_image_path).convolve(kernel::BoxBlur);
+    test_image = ppm::read(test_image_convolved_path);
+    EXPECT_EQ(conv_image == test_image, true);
+}
+
+TEST(image, _exception_image_at)
+{
+    EXPECT_THROW(test_image.at(test_image.height() +1, 0, 0), image<uint8_t>::_exception_image_at);
+    EXPECT_THROW(test_image.at(0, test_image.width() +1, 0), image<uint8_t>::_exception_image_at);
+    EXPECT_THROW(test_image.at(0, 0, test_image.channels() +1), image<uint8_t>::_exception_image_at);
+}
+
+TEST(image, _exception_image_convolve)
+{
+    kernel_t kernel_even_height ({
+        { 1, 1, 1 },
+        { 1, 1, 1 }
+    }, 1);
+
+    kernel_t kernel_even_width ({
+        { 1, 1 },
+        { 1, 1 },
+        { 1, 1 }
+    }, 1);
+
+    kernel_t kernel_mismatched_width_height ({
+        { 1 },
+        { 1 },
+        { 1 }
+    }, 1);
+
+    EXPECT_THROW(test_image.convolve(kernel_even_height), image<uint8_t>::_exception_image_convolve);
+    EXPECT_THROW(test_image.convolve(kernel_even_width), image<uint8_t>::_exception_image_convolve);
+    EXPECT_THROW(test_image.convolve(kernel_mismatched_width_height), image<uint8_t>::_exception_image_convolve);
 }
