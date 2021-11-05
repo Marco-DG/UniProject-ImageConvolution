@@ -21,10 +21,6 @@ namespace dglib
             std::size_t _height;
             std::size_t _channels;
 
-            // exceptions
-            struct _exception_image_at;
-            struct _exception_image_convolve;
-
             // methods
             void _at_check_params(std::size_t y, std::size_t x, std::size_t c) const;
 
@@ -32,6 +28,10 @@ namespace dglib
             // constructors
             image(std::size_t height, std::size_t width, std::size_t channels, T* data);
             image(std::size_t height, std::size_t width, std::size_t channels, std::vector<T> data);
+
+            // exceptions
+            struct _exception_image_at;
+            struct _exception_image_convolve;
 
             // operators
             bool operator == (const image<T>& compare_to_image) const;
