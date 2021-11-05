@@ -17,7 +17,7 @@ namespace dglib::kernel
         { 0, 0, 0 }
     }, 1);
 
-    kernel_t StrongEdgeDetection ({
+    kernel_t WeakEdgeDetection ({
         { 1, 0,-1 },
         { 0, 0, 0 },
         {-1, 0, 1 }
@@ -29,7 +29,7 @@ namespace dglib::kernel
         { 0,-1, 0 }
     }, 1);
 
-    kernel_t WeakEdgeDetection ({
+    kernel_t StrongEdgeDetection ({
         {-1,-1,-1 },
         {-1, 8,-1 },
         {-1,-1,-1 }
