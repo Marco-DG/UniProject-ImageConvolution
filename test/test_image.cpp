@@ -2,7 +2,6 @@
 #include "../dglib/image.h"
 #include "../dglib/kernel.h"
 #include "../dglib/ppm.h"
-#include "../dglib/exception.h"
 
 #include <cstddef> // size_t
 #include <cstdint> // uint8_t
@@ -56,9 +55,9 @@ TEST(image, convolve)
 
 TEST(image, _exception_image_at)
 {
-    EXPECT_THROW(test_image.at(test_image.height() +1, 0, 0), image<uint8_t>::_exception_image_at);
-    EXPECT_THROW(test_image.at(0, test_image.width() +1, 0), image<uint8_t>::_exception_image_at);
-    EXPECT_THROW(test_image.at(0, 0, test_image.channels() +1), image<uint8_t>::_exception_image_at);
+    EXPECT_THROW(test_image.at(test_image.height(), 0, 0), image<uint8_t>::_exception_image_at);
+    EXPECT_THROW(test_image.at(0, test_image.width(), 0), image<uint8_t>::_exception_image_at);
+    EXPECT_THROW(test_image.at(0, 0, test_image.channels()), image<uint8_t>::_exception_image_at);
 }
 
 TEST(image, _exception_image_convolve)
