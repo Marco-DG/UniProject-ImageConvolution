@@ -2,8 +2,8 @@
 
 Implemented kernels from [Wikipedia](https://en.wikipedia.org/wiki/Kernel_(image_processing))
 
-![alt text](https://github.com/Marco-DG/UniProject-ImageConvolution/blob/master/readme_rsc/Identity.png?raw=true)
-![alt text](https://github.com/Marco-DG/UniProject-ImageConvolution/blob/master/lena.ppm?raw=true)
+![alt text](https://github.com/Marco-DG/UniProject-ImageConvolution/blob/main/readme_rsc/Identity.png?raw=true)
+![alt text](https://github.com/Marco-DG/UniProject-ImageConvolution/blob/main/lena.ppm?raw=true)
 
 
 Compile lena:
